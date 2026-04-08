@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Prediction App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102,126,234,0.5);
+        }
+
+        .btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏦 Loan Prediction System</h1>
+
+    <form action="/predict" method="POST">
+        <div class="form-grid">
+
+            <div>
+                <label>Gender</label>
+                <select name="Gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Married</label>
+                <select name="Married">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Dependents</label>
+                <select name="Dependents">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3+</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Education</label>
+                <select name="Education">
+                    <option>Graduate</option>
+                    <option>Not Graduate</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Self Employed</label>
+                <select name="Self_Employed">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Credit History</label>
+                <select name="Credit_History">
+                    <option value="1">Good (1)</option>
+                    <option value="0">Bad (0)</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Property Area</label>
+                <select name="Property_Area">
+                    <option>Urban</option>
+                    <option>Semiurban</option>
+                    <option>Rural</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Applicant Income</label>
+                <input type="number" name="ApplicantIncome" required>
+            </div>
+
+            <div>
+                <label>Coapplicant Income</label>
+                <input type="number" name="CoapplicantIncome" required>
+            </div>
+
+            <div>
+                <label>Loan Amount</label>
+                <input type="number" name="LoanAmount" required>
+            </div>
+
+            <div>
+                <label>Loan Term</label>
+                <input type="number" name="Loan_Amount_Term" required>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn">Predict Loan Status 🚀</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
